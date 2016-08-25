@@ -5,6 +5,9 @@ import java.awt.Insets;
 import javax.swing.JFrame;
 
 import de.ImOlli.engine.Display;
+import de.ImOlli.engine.RenderObject;
+import de.ImOlli.entitys.Player;
+import de.ImOlli.managers.KeyCheckManager;
 
 public class Game extends JFrame{
 
@@ -17,6 +20,7 @@ public class Game extends JFrame{
 	private Thread thread;
 	private Insets border;
 	private Display display;
+	private Player player;
 
 	public Game(){
 		setSize(width, height);
@@ -35,11 +39,18 @@ public class Game extends JFrame{
 
 	private void init() {
 		
+		addKeyListener(new KeyCheckManager());
+		
 		display = new Display();
 		display.setBounds(0, 0, width, height);
 		display.setFocusable(true);
+		display.addKeyListener(new KeyCheckManager());
 		
 		add(display);
+		
+		player = new Player(0, 0);
+		
+		display.addToRenderList(player);
 		
 		startMainLoop();
 	}
@@ -55,6 +66,9 @@ public class Game extends JFrame{
 				while(running){
 					try {
 						Thread.sleep(15);
+						for(RenderObject renderObject : display.getRenderlist()){
+							renderObject.update();
+						}
 						repaint();
 					} catch (InterruptedException e) {
 						e.printStackTrace();

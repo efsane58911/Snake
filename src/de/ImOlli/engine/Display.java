@@ -23,6 +23,16 @@ public class Display extends JComponent{
 		}
 	}
 	
+	public void addToRenderList(RenderObject renderObject){
+		renderlist.add(renderObject);
+	}
+	
+	public void removeFromRenderList(RenderObject renderObject){
+		if(renderlist.contains(renderObject)){
+			renderlist.remove(renderObject);
+		}
+	}
+	
 	public ArrayList<RenderObject> getRenderlist(){
 		return renderlist;
 	}
