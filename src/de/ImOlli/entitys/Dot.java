@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import de.ImOlli.engine.RenderObject;
+import de.ImOlli.game.Game;
 
 public class Dot extends RenderObject {
 
@@ -49,8 +50,24 @@ public class Dot extends RenderObject {
 	}
 	
 	public void updateMovement(Integer moveX, Integer moveY){
+		
 		this.x = x + moveX;
 		this.y = y + moveY;
+		
+		if(x + width > Game.getGameWidth()){
+			x = 0;
+		}
+		if(x < 0){
+			x = Game.getGameWidth() - width;
+		}
+		
+		if(y + height > Game.getGameHeight()){
+			y = 0;
+		}
+		if(y < 0){
+			y = Game.getGameHeight() - height;
+		}
+		
 	}
 
 }
