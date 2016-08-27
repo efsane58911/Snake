@@ -13,7 +13,7 @@ public class Game extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private static final String title = "Snake";
-	private static final String version = "ALPHA v1.0";
+	private static final String version = "ALPHA v1.1";
 	private static final Integer width = 1280;
 	private static final Integer height = 720;
 	private static Boolean running = false;
