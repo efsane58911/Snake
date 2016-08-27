@@ -48,7 +48,7 @@ public class Game extends JFrame{
 		
 		add(display);
 		
-		player = new Player(80, 80);
+		player = new Player(400, 400);
 		
 		display.addToRenderList(player);
 		

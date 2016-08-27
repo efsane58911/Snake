@@ -12,10 +12,12 @@ public class Dot extends RenderObject {
 	private Integer y;
 	private final Integer width = 40;
 	private final Integer height = 40;
+	private final Integer key;
 	
-	public Dot(Integer x, Integer y){
+	public Dot(Integer x, Integer y, Integer key){
 		this.x = x;
 		this.y = y;
+		this.key = key;
 	}
 	
 	@Override
@@ -68,6 +70,10 @@ public class Dot extends RenderObject {
 			y = Game.getGameHeight() - height;
 		}
 		
+	}
+
+	public Integer getKey() {
+		return this.key;
 	}
 
 }

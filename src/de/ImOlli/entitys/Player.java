@@ -2,6 +2,7 @@ package de.ImOlli.entitys;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.ImOlli.engine.RenderObject;
@@ -15,13 +16,21 @@ public class Player extends RenderObject{
 	private HashMap<Integer, Dot> dots;
 	private Side moveDir = Side.RIGHT;
 	private Boolean delay = false;
+	private Boolean keydelay = false;
+	private ArrayList<Side> moveHistory;
 	
 	public Player(Integer x, Integer y){
 		this.x  = x;
 		this.y = y;
+		this.moveHistory = new ArrayList<>();
+		
 		dots = new HashMap<>();
-		dots.put(0, new Dot(x, y));
-		dots.put(1, new Dot(x-40, y));
+		dots.put(0, new Dot(x, y, 0));
+		dots.put(1, new Dot(x-40, y, 1));
+		dots.put(2, new Dot(x-80, y, 2));
+		dots.put(3, new Dot(x-120, y, 3));
+		
+		moveHistory.add(moveDir);
 		
 	}
 	
@@ -32,20 +41,43 @@ public class Player extends RenderObject{
 		}
 	}
 
+	public void checkKeys(){
+		if(!keydelay){
+			if(KeyCheckManager.keysCheck(KeyEvent.VK_W)){
+				moveDir = Side.TOP;
+			}else if(KeyCheckManager.keysCheck(KeyEvent.VK_S)){
+				moveDir = Side.BOTTOM;
+			}else if(KeyCheckManager.keysCheck(KeyEvent.VK_A)){
+				moveDir = Side.LEFT;
+			}else if(KeyCheckManager.keysCheck(KeyEvent.VK_D)){
+				moveDir = Side.RIGHT;
+			}else{
+				return;
+			}
+			
+			keydelay = true;
+			
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(300);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					keydelay = false;
+				}
+			}).start();
+		}
+	}
+	
 	@Override
 	public void update() {
 		Integer moveX = 0;
 		Integer moveY = 0;
 		
-		if(KeyCheckManager.keysCheck(KeyEvent.VK_W)){
-			moveDir = Side.TOP;
-		}else if(KeyCheckManager.keysCheck(KeyEvent.VK_S)){
-			moveDir = Side.BOTTOM;
-		}else if(KeyCheckManager.keysCheck(KeyEvent.VK_A)){
-			moveDir = Side.LEFT;
-		}else if(KeyCheckManager.keysCheck(KeyEvent.VK_D)){
-			moveDir = Side.RIGHT;
-		}
+		checkKeys();
 		
 		if(!delay){
 			switch (moveDir) {
@@ -65,6 +97,8 @@ public class Player extends RenderObject{
 			
 			delay = true;
 			
+			moveHistory.add(moveDir);
+			
 			new Thread(new Runnable() {
 				
 				@Override
@@ -77,17 +111,51 @@ public class Player extends RenderObject{
 					delay = false;
 				}
 			}).start();
+			
+			x = x + moveX;
+			y = y + moveY;
+			
+			dots.get(0).updateMovement(moveX, moveY);
+			
+			for(Dot dot : dots.values()){
+				if(dot.getKey() != 0){
+					
+					Integer gettingKey = dot.getKey();
+					Integer finalKey = moveHistory.size()-1-gettingKey;
+					
+					while((finalKey = moveHistory.size()-1-gettingKey) < 0){
+						gettingKey--;
+					}
+					
+					Side side;
+					try{
+						side = moveHistory.get(finalKey);
+					}catch(Exception e){
+						side = null;
+					}
+					
+					dot.updateMovement(getMovementBySide(side)[0], getMovementBySide(side)[1]);
+				}
+			}
+			
 		}
-		
-		
-		x = x + moveX;
-		y = y + moveY;
-		
-		dots.get(0).updateMovement(moveX, moveY);
-		dots.get(1).updateMovement(moveX, moveY);
 		
 	}
 	
+	private Integer[] getMovementBySide(Side side) {
+		switch (side) {
+		case TOP:
+			return new Integer[]{0, -40};
+		case BOTTOM:
+			return new Integer[]{0, 40};
+		case RIGHT:
+			return new Integer[]{40, 0};
+		case LEFT:
+			return new Integer[]{-40, 0};
+		}
+		return null;
+	}
+
 	@Override
 	public Integer getX() {
 		return x;
