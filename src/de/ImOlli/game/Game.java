@@ -48,7 +48,7 @@ public class Game extends JFrame{
 		
 		add(display);
 		
-		player = new Player(0, 0);
+		player = new Player(80, 80);
 		
 		display.addToRenderList(player);
 		
@@ -78,5 +78,13 @@ public class Game extends JFrame{
 			}
 		});
 		thread.start();
+	}
+
+	public static Integer getGameWidth(){
+		return width;
+	}
+	
+	public static Integer getGameHeight(){
+		return height;
 	}
 }
