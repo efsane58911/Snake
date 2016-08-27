@@ -6,12 +6,15 @@ import java.util.HashMap;
 
 import de.ImOlli.engine.RenderObject;
 import de.ImOlli.managers.KeyCheckManager;
+import javafx.geometry.Side;
 
 public class Player extends RenderObject{
 
 	private Integer x;
 	private Integer y;
 	private HashMap<Integer, Dot> dots;
+	private Side moveDir = Side.RIGHT;
+	private Boolean delay = false;
 	
 	public Player(Integer x, Integer y){
 		this.x  = x;
@@ -35,14 +38,47 @@ public class Player extends RenderObject{
 		Integer moveY = 0;
 		
 		if(KeyCheckManager.keysCheck(KeyEvent.VK_W)){
-			moveY = -40;
+			moveDir = Side.TOP;
 		}else if(KeyCheckManager.keysCheck(KeyEvent.VK_S)){
-			moveY = 40;
+			moveDir = Side.BOTTOM;
 		}else if(KeyCheckManager.keysCheck(KeyEvent.VK_A)){
-			moveX = -40;
+			moveDir = Side.LEFT;
 		}else if(KeyCheckManager.keysCheck(KeyEvent.VK_D)){
-			moveX = 40;
+			moveDir = Side.RIGHT;
 		}
+		
+		if(!delay){
+			switch (moveDir) {
+			case TOP:
+				moveY = -40;
+				break;
+			case BOTTOM:
+				moveY = 40;
+				break;
+			case RIGHT:
+				moveX = 40;
+				break;
+			case LEFT:
+				moveX = -40;
+				break;
+			}
+			
+			delay = true;
+			
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(400);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					delay = false;
+				}
+			}).start();
+		}
+		
 		
 		x = x + moveX;
 		y = y + moveY;
