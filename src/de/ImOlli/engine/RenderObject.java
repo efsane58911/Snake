@@ -3,7 +3,7 @@ package de.ImOlli.engine;
 import java.awt.Graphics;
 
 public abstract class RenderObject {
-	
+
 	public abstract Integer getX();
 
 	public abstract Integer getY();
