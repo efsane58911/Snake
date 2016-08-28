@@ -69,6 +69,8 @@ public class Player extends RenderObject{
 		
 		checkKeys();
 		
+		//TODO Make Moving Softer
+		
 		if(!delay){
 			switch (moveDir) {
 			case TOP:
@@ -126,10 +128,8 @@ public class Player extends RenderObject{
 					
 					dot.updateMovement(getMovementBySide(side)[0], getMovementBySide(side)[1]);
 				}
-			}
-			
+			}		
 		}
-		
 	}
 	
 	private Integer[] getMovementBySide(Side side) {

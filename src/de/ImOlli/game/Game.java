@@ -1,8 +1,13 @@
 package de.ImOlli.game;
 
+import java.awt.Font;
 import java.awt.Insets;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import de.ImOlli.engine.Display;
 import de.ImOlli.engine.RenderObject;
@@ -34,11 +39,70 @@ public class Game extends JFrame{
 		setLayout(null);
 		setLocation(100, 100);
 		
-		init();
+		initMenu();
 	}
 
-	private void init() {
+	private void initMenu() {
 		
+
+		Font f = new Font("Tahoma",Font.BOLD,100);
+		
+		JLabel l = new JLabel(title);
+		JButton b = new JButton("Start");
+		JButton b2 = new JButton("Options");
+		JButton b3 = new JButton("Credits");
+		
+		l.setFont(f);
+		
+		l.setBounds((width/2)-155, 100, 400, 100);
+		b.setBounds((width/2)-200, 300, 400, 40);
+		b2.setBounds((width/2)-200, 400, 400, 40);
+		b3.setBounds((width/2)-200, 500, 400, 40);
+		
+		add(l);
+		add(b);
+		add(b2);
+		add(b3);
+		
+		b.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				remove(b);
+				remove(b2);
+				remove(b3);
+				remove(l);
+				initGame();	
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		
+		setVisible(true);
+	}
+
+	private void initGame() {
+		
+		setFocusable(true);
+		requestFocus();
 		addKeyListener(new KeyCheckManager());
 		
 		display = new Display();
