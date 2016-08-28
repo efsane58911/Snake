@@ -16,7 +16,6 @@ public class Player extends RenderObject{
 	private HashMap<Integer, Dot> dots;
 	private Side moveDir = Side.RIGHT;
 	private Boolean delay = false;
-	private Boolean keydelay = false;
 	private ArrayList<Side> moveHistory;
 	
 	public Player(Integer x, Integer y){
@@ -50,33 +49,16 @@ public class Player extends RenderObject{
 	}
 
 	public void checkKeys(){
-		if(!keydelay){
-			if(KeyCheckManager.keysCheck(KeyEvent.VK_W)){
-				moveDir = Side.TOP;
-			}else if(KeyCheckManager.keysCheck(KeyEvent.VK_S)){
-				moveDir = Side.BOTTOM;
-			}else if(KeyCheckManager.keysCheck(KeyEvent.VK_A)){
-				moveDir = Side.LEFT;
-			}else if(KeyCheckManager.keysCheck(KeyEvent.VK_D)){
-				moveDir = Side.RIGHT;
-			}else{
-				return;
-			}
-			
-			keydelay = true;
-			
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					try {
-						Thread.sleep(300);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					keydelay = false;
-				}
-			}).start();
+		if(KeyCheckManager.keysCheck(KeyEvent.VK_W)){
+			moveDir = Side.TOP;
+		}else if(KeyCheckManager.keysCheck(KeyEvent.VK_S)){
+			moveDir = Side.BOTTOM;
+		}else if(KeyCheckManager.keysCheck(KeyEvent.VK_A)){
+			moveDir = Side.LEFT;
+		}else if(KeyCheckManager.keysCheck(KeyEvent.VK_D)){
+			moveDir = Side.RIGHT;
+		}else{
+			return;
 		}
 	}
 	
