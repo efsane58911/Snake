@@ -29,6 +29,14 @@ public class Player extends RenderObject{
 		dots.put(1, new Dot(x-40, y, 1));
 		dots.put(2, new Dot(x-80, y, 2));
 		dots.put(3, new Dot(x-120, y, 3));
+		dots.put(4, new Dot(x-160, y, 4));
+		dots.put(5, new Dot(x-200, y, 5));
+		dots.put(6, new Dot(x-240, y, 6));
+		dots.put(7, new Dot(x-280, y, 7));
+		dots.put(8, new Dot(x-320, y, 8));
+		dots.put(9, new Dot(x-360, y, 9));
+		dots.put(10, new Dot(x-400, y, 10));
+		
 		
 		moveHistory.add(moveDir);
 		
