@@ -47,8 +47,8 @@ public class Dot extends RenderObject {
 		}else{
 			g.setColor(Color.BLUE);
 		}
-		//g.fillRect(x, y, width, height);
-		g.fillRoundRect(x, y, width, height, 25, 25);
+		g.fillRect(x, y, width, height);
+		//g.fillRoundRect(x, y, width, height, 25, 25);
 	}
 
 	@Override
