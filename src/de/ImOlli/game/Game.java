@@ -1,5 +1,6 @@
 package de.ImOlli.game;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
@@ -53,13 +54,16 @@ public class Game extends JFrame {
 		JButton b3 = new JButton("Credits");
 
 		l.setFont(f);
-
 		l.setBounds((width / 2) - 155, 100, 400, 100);
 		l2.setBounds(width - 100, height - 50, 100, 50);
+		
 		b.setBounds((width / 2) - 200, 300, 400, 40);
+		b.setBackground(new Color(212, 212, 212));
 		b2.setBounds((width / 2) - 200, 400, 400, 40);
+		b2.setBackground(new Color(212, 212, 212));
 		b3.setBounds((width / 2) - 200, 500, 400, 40);
-
+		b3.setBackground(new Color(212, 212, 212));
+		
 		add(l);
 		add(l2);
 		add(b);
