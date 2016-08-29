@@ -47,7 +47,7 @@ public class Player extends RenderObject {
 		}
 	}
 
-	public void checkKeys() {
+	private void checkKeys() {
 		if (KeyCheckManager.keysCheck(KeyEvent.VK_W)) {
 			moveDir = Side.TOP;
 		} else if (KeyCheckManager.keysCheck(KeyEvent.VK_S)) {

@@ -25,6 +25,7 @@ public class DebugScreen extends RenderObject {
 		if(KeyCheckManager.keysCheck(KeyEvent.VK_F)){
 			g.setColor(Color.black);
 			g.drawString("Debug Screen", 10, 20);
+			g.drawString("Player: [X:"+game.getPlayer().getX()+"] [Y:"+game.getPlayer().getY()+"]", 10, 40);
 		}
 	}
 

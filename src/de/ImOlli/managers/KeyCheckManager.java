@@ -31,5 +31,4 @@ public class KeyCheckManager implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
-
 }

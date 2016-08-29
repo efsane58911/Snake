@@ -159,4 +159,8 @@ public class Game extends JFrame {
 	public static Integer getGameHeight() {
 		return height;
 	}
+	
+	public Player getPlayer(){
+		return player;
+	}
 }
