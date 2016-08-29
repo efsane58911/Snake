@@ -14,6 +14,7 @@ import de.ImOlli.engine.Display;
 import de.ImOlli.engine.RenderObject;
 import de.ImOlli.entitys.Player;
 import de.ImOlli.managers.KeyCheckManager;
+import de.ImOlli.objects.DebugScreen;
 
 public class Game extends JFrame {
 
@@ -27,6 +28,7 @@ public class Game extends JFrame {
 	private Insets border;
 	private Display display;
 	private Player player;
+	private DebugScreen debugScreen;
 
 	public Game() {
 		setSize(width, height);
@@ -116,9 +118,12 @@ public class Game extends JFrame {
 		add(display);
 
 		player = new Player(400, 400);
+		
+		debugScreen = new DebugScreen(this);
 
 		display.addToRenderList(player);
-
+		display.addToRenderList(debugScreen);
+		
 		startMainLoop();
 	}
 
