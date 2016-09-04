@@ -49,13 +49,21 @@ public class Player extends RenderObject {
 
 	private void checkKeys() {
 		if (KeyCheckManager.keysCheck(KeyEvent.VK_W)) {
-			moveDir = Side.TOP;
+			if(moveDir != Side.BOTTOM){
+				moveDir = Side.TOP;
+			}
 		} else if (KeyCheckManager.keysCheck(KeyEvent.VK_S)) {
-			moveDir = Side.BOTTOM;
+			if(moveDir != Side.TOP){
+				moveDir = Side.BOTTOM;
+			}
 		} else if (KeyCheckManager.keysCheck(KeyEvent.VK_A)) {
-			moveDir = Side.LEFT;
+			if(moveDir != Side.RIGHT){
+				moveDir = Side.LEFT;
+			}
 		} else if (KeyCheckManager.keysCheck(KeyEvent.VK_D)) {
-			moveDir = Side.RIGHT;
+			if(moveDir != Side.LEFT){
+				moveDir = Side.RIGHT;
+			}
 		} else {
 			return;
 		}
