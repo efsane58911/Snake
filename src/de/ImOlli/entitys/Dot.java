@@ -42,11 +42,7 @@ public class Dot extends RenderObject {
 
 	@Override
 	public void draw(Graphics g) {
-		if(this.key == 0){
-			g.setColor(Color.CYAN);
-		}else{
-			g.setColor(Color.BLUE);
-		}
+		g.setColor(Color.DARK_GRAY);
 		g.fillRect(x, y, width, height);
 		//g.fillRoundRect(x, y, width, height, 25, 25);
 	}
