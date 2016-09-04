@@ -64,6 +64,9 @@ public class Player extends RenderObject {
 			if(moveDir != Side.LEFT){
 				moveDir = Side.RIGHT;
 			}
+		} else if (KeyCheckManager.keysCheck(KeyEvent.VK_E)){
+			System.out.println("hasd");
+			growUp();
 		} else {
 			return;
 		}
@@ -75,8 +78,6 @@ public class Player extends RenderObject {
 		Integer moveY = 0;
 
 		checkKeys();
-
-		// TODO Make Moving Softer
 
 		if (!delay) {
 			switch (moveDir) {
@@ -120,22 +121,38 @@ public class Player extends RenderObject {
 				if (dot.getKey() != 0) {
 
 					Integer gettingKey = dot.getKey();
-					Integer finalKey = moveHistory.size() - 1 - gettingKey;
-
-					while ((finalKey = moveHistory.size() - 1 - gettingKey) < 0) {
-						gettingKey--;
-					}
-
-					Side side;
-					try {
-						side = moveHistory.get(finalKey);
-					} catch (Exception e) {
-						side = null;
-					}
+					Side side = getLastMove(gettingKey);
 
 					dot.updateMovement(getMovementBySide(side)[0], getMovementBySide(side)[1]);
 				}
 			}
+		}
+	}
+	
+	public Side getLastMove(Integer key){
+		
+		Integer finalKey = moveHistory.size() - 1 - key;
+
+		while ((finalKey = moveHistory.size() - 1 - key) < 0) {
+			key--;
+		}
+		
+		try {
+			return moveHistory.get(finalKey);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void growUp(){
+		if(dots.get(dots.size()) == null){
+			
+			Dot dot = dots.get(dots.size()-1);
+			
+			Side side = getLastMove(dot.getKey());
+			
+			dots.put(dots.size(), new Dot(dot.getX()-getMovementBySide(side)[0], dot.getY()-getMovementBySide(side)[1], dots.size()));
 		}
 	}
 
