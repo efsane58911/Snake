@@ -24,12 +24,10 @@ public class Player extends RenderObject {
 		this.moveHistory = new ArrayList<>();
 
 		dots = new HashMap<>();
-		dots.put(0, new Dot(x, y, 0));
-		dots.put(1, new Dot(x - 40, y, 1));
-		dots.put(2, new Dot(x - 80, y, 2));
-
 		moveHistory.add(moveDir);
-
+		dots.put(0, new Dot(x, y, 0));
+		growUp();
+		growUp();
 	}
 
 	@Override
