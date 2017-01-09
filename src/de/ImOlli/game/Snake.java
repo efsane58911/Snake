@@ -2,14 +2,14 @@ package de.ImOlli.game;
 
 public class Snake {
 
-	private static Game game;
+    private static Game game;
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		game = new Game();
-	}
+        game = new Game();
+    }
 
-	public Game getGame() {
-		return game;
-	}
+    public Game getGame() {
+        return game;
+    }
 }
