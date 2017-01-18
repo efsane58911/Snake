@@ -13,7 +13,7 @@ public class FoodManager implements Runnable {
     private Thread thread;
     private Integer delay;
     private Integer maxFoodSpawned;
-    private Game game;
+    private final Game game;
 
     public FoodManager(Game game, Integer delay, Integer maxFoodSpawned) {
         this.game = game;

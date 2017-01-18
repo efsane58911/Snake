@@ -13,7 +13,7 @@ public class DebugScreen extends RenderObject {
     private final Integer y = 0;
     private final Integer width = Game.getGameWidth();
     private final Integer height = Game.getGameHeight();
-    private Game game;
+    private final Game game;
 
     public DebugScreen(Game game) {
         this.game = game;

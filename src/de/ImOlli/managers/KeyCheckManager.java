@@ -8,10 +8,7 @@ public class KeyCheckManager implements KeyListener {
     private static boolean keys[] = new boolean[100];
 
     public static boolean keysCheck(int keycode) {
-        if (keycode >= 0 && (keycode < keys.length))
-            return keys[keycode];
-        else
-            return false;
+        return keycode >= 0 && (keycode < keys.length) && keys[keycode];
     }
 
     @Override

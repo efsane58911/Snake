@@ -18,7 +18,7 @@ public class Player extends RenderObject {
     private Side moveDir = Side.RIGHT;
     private Boolean delay = false;
     private ArrayList<Side> moveHistory;
-    private Game game;
+    private final Game game;
 
     public Player(Game game, Integer x, Integer y) {
         this.game = game;
@@ -59,8 +59,6 @@ public class Player extends RenderObject {
             }
         } else if (KeyCheckManager.keysCheck(KeyEvent.VK_E)) {
             growUp();
-        } else {
-            return;
         }
     }
 
@@ -129,7 +127,7 @@ public class Player extends RenderObject {
 
     public Side getLastMove(Integer key) {
 
-        Integer finalKey = moveHistory.size() - 1 - key;
+        Integer finalKey;
 
         while ((finalKey = moveHistory.size() - 1 - key) < 0) {
             key--;
