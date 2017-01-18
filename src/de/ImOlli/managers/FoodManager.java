@@ -45,19 +45,23 @@ public class FoodManager implements Runnable {
             final Integer randomX = (int) (Math.random() * width);
             final Integer randomY = (int) (Math.random() * height);
 
-            Food food = new Food(game, randomX * 40, randomY * 40);
+            for (Food food : spawnedFood) { //Check if Food spawns on Food
+                if (randomX.equals(food.getX() / 40) && randomY.equals(food.getY() / 40)) {
+                    spawnFood();
+                    return false;
+                }
+            }
 
-            for (Dot dot : game.getPlayer().getDots().values()) {
-
-                //System.out.println("DEBUG: " + dot.getX() / 40 + " " + dot.getY() / 40 + " | " + randomX + " " + randomY);
-
+            for (Dot dot : game.getPlayer().getDots().values()) { // Check if Food spawns on Player
                 if (randomX.equals(dot.getX() / 40) && randomY.equals(dot.getY() / 40)) {
                     spawnFood();
                     return false;
                 }
             }
 
-            game.getDisplay().addToRenderList(food);
+            Food food = new Food(game, randomX * 40, randomY * 40);
+
+            game.addToAddList(food);
             spawnedFood.add(food);
 
             return true;

@@ -28,6 +28,7 @@ public class Game extends JFrame {
     private FoodManager foodManager;
     private DebugScreen debugScreen;
     private ArrayList<RenderObject> removeList;
+    private ArrayList<RenderObject> addList;
 
     public Game() {
         setSize(width, height);
@@ -110,6 +111,7 @@ public class Game extends JFrame {
         addKeyListener(new KeyCheckManager());
 
         removeList = new ArrayList<>();
+        addList = new ArrayList<>();
 
         display = new Display();
         display.setBounds(0, 0, width, height);
@@ -120,7 +122,7 @@ public class Game extends JFrame {
 
         player = new Player(this, 400, 400);
 
-        foodManager = new FoodManager(this, 2000, 3);
+        foodManager = new FoodManager(this, 10, 200);
         foodManager.start();
 
         debugScreen = new DebugScreen(this);
@@ -152,6 +154,11 @@ public class Game extends JFrame {
                         }
                         removeList.clear();
 
+                        for (RenderObject renderObject : addList) {
+                            display.addToRenderList(renderObject);
+                        }
+                        addList.clear();
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                         running = false;
@@ -164,6 +171,10 @@ public class Game extends JFrame {
 
     public void addToRemoveList(RenderObject renderObject) {
         removeList.add(renderObject);
+    }
+
+    public void addToAddList(RenderObject renderObject) {
+        addList.add(renderObject);
     }
 
     public static Integer getGameWidth() {

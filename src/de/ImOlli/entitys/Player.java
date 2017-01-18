@@ -102,10 +102,10 @@ public class Player extends RenderObject {
                 }
             }).start();
 
-            x = x + moveX;
-            y = y + moveY;
-
             dots.get(0).updateMovement(moveX, moveY);
+
+            x = dots.get(0).getX();
+            y = dots.get(0).getY();
 
             for (Dot dot : dots.values()) {
                 if (dot.getKey() != 0) {
