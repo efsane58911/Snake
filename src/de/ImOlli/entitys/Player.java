@@ -18,6 +18,7 @@ public class Player extends RenderObject {
     private Side moveDir = Side.RIGHT;
     private Boolean delay = false;
     private ArrayList<Side> moveHistory;
+    private Boolean death = false;
     private final Game game;
 
     public Player(Game game, Integer x, Integer y) {
@@ -28,7 +29,7 @@ public class Player extends RenderObject {
 
         dots = new HashMap<>();
         moveHistory.add(moveDir);
-        dots.put(0, new Dot(x, y, 0));
+        dots.put(0, new Dot(game, x, y, 0));
         growUp();
         growUp();
     }
@@ -41,6 +42,7 @@ public class Player extends RenderObject {
     }
 
     private void checkKeys() {
+        if (death) return;
         if (KeyCheckManager.keysCheck(KeyEvent.VK_W)) {
             if (moveDir != Side.BOTTOM) {
                 moveDir = Side.TOP;
@@ -64,6 +66,7 @@ public class Player extends RenderObject {
 
     @Override
     public void update() {
+        if (death) return;
         Integer moveX = 0;
         Integer moveY = 0;
 
@@ -148,8 +151,15 @@ public class Player extends RenderObject {
 
             Side side = getLastMove(dot.getKey());
 
-            dots.put(dots.size(), new Dot(dot.getX() - getMovementBySide(side)[0], dot.getY() - getMovementBySide(side)[1], dots.size()));
+            dots.put(dots.size(), new Dot(game, dot.getX() - getMovementBySide(side)[0], dot.getY() - getMovementBySide(side)[1], dots.size()));
         }
+    }
+
+
+    public void die() {
+        this.death = true;
+        game.getFoodManager().stop();
+        game.getEndScreen().show();
     }
 
     private Integer[] getMovementBySide(Side side) {

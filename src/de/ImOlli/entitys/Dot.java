@@ -12,8 +12,10 @@ public class Dot extends RenderObject {
     private final Integer width = 40;
     private final Integer height = 40;
     private final Integer key;
+    private final Game game;
 
-    public Dot(Integer x, Integer y, Integer key) {
+    public Dot(Game game, Integer x, Integer y, Integer key) {
+        this.game = game;
         this.x = x;
         this.y = y;
         this.key = key;
@@ -52,6 +54,23 @@ public class Dot extends RenderObject {
     }
 
     public void updateMovement(Integer moveX, Integer moveY) {
+
+        if (getKey() == 0) {
+
+            Integer collisionX = x + moveX;
+            Integer collisionY = y + moveY;
+
+            for (Dot dot : game.getPlayer().getDots().values()) {
+                if (dot.getKey() != 0) {
+                    if (collisionX.equals(dot.getX()) && collisionY.equals(dot.getY())) {
+
+                        System.out.println("Game End!");
+                        game.getPlayer().die();
+
+                    }
+                }
+            }
+        }
 
         this.x = x + moveX;
         this.y = y + moveY;
