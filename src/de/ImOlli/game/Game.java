@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class Game extends JFrame {
 
@@ -26,6 +27,7 @@ public class Game extends JFrame {
     private Player player;
     private FoodManager foodManager;
     private DebugScreen debugScreen;
+    private ArrayList<RenderObject> removeList;
 
     public Game() {
         setSize(width, height);
@@ -107,6 +109,8 @@ public class Game extends JFrame {
         requestFocus();
         addKeyListener(new KeyCheckManager());
 
+        removeList = new ArrayList<>();
+
         display = new Display();
         display.setBounds(0, 0, width, height);
         display.setFocusable(true);
@@ -114,7 +118,10 @@ public class Game extends JFrame {
 
         add(display);
 
-        player = new Player(400, 400);
+        player = new Player(this, 400, 400);
+
+        foodManager = new FoodManager(this, 2000, 3);
+        foodManager.start();
 
         debugScreen = new DebugScreen(this);
 
@@ -139,6 +146,12 @@ public class Game extends JFrame {
                             renderObject.update();
                         }
                         repaint();
+
+                        for (RenderObject renderObject : removeList) {
+                            display.removeFromRenderList(renderObject);
+                        }
+                        removeList.clear();
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                         running = false;
@@ -147,6 +160,10 @@ public class Game extends JFrame {
             }
         });
         thread.start();
+    }
+
+    public void addToRemoveList(RenderObject renderObject) {
+        removeList.add(renderObject);
     }
 
     public static Integer getGameWidth() {
@@ -159,5 +176,17 @@ public class Game extends JFrame {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Display getDisplay() {
+        return display;
+    }
+
+    public FoodManager getFoodManager() {
+        return foodManager;
+    }
+
+    public DebugScreen getDebugScreen() {
+        return debugScreen;
     }
 }

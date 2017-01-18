@@ -1,6 +1,7 @@
 package de.ImOlli.entitys;
 
 import de.ImOlli.engine.RenderObject;
+import de.ImOlli.game.Game;
 import de.ImOlli.managers.KeyCheckManager;
 import javafx.geometry.Side;
 
@@ -17,8 +18,10 @@ public class Player extends RenderObject {
     private Side moveDir = Side.RIGHT;
     private Boolean delay = false;
     private ArrayList<Side> moveHistory;
+    private Game game;
 
-    public Player(Integer x, Integer y) {
+    public Player(Game game, Integer x, Integer y) {
+        this.game = game;
         this.x = x;
         this.y = y;
         this.moveHistory = new ArrayList<>();
@@ -115,6 +118,12 @@ public class Player extends RenderObject {
                     dot.updateMovement(getMovementBySide(side)[0], getMovementBySide(side)[1]);
                 }
             }
+
+            if (game.getFoodManager().checkCollision(dots.get(0).getX(), dots.get(0).getY())) {
+
+                growUp();
+
+            }
         }
     }
 
@@ -179,4 +188,7 @@ public class Player extends RenderObject {
         return null;
     }
 
+    public HashMap<Integer, Dot> getDots() {
+        return dots;
+    }
 }
