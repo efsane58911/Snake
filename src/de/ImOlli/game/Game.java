@@ -122,7 +122,7 @@ public class Game extends JFrame {
 
         player = new Player(this, 400, 400);
 
-        foodManager = new FoodManager(this, 10, 200);
+        foodManager = new FoodManager(this, 2000, 3);
         foodManager.start();
 
         debugScreen = new DebugScreen(this);
