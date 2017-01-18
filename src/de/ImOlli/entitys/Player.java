@@ -55,7 +55,6 @@ public class Player extends RenderObject {
                 moveDir = Side.RIGHT;
             }
         } else if (KeyCheckManager.keysCheck(KeyEvent.VK_E)) {
-            System.out.println("hasd");
             growUp();
         } else {
             return;
