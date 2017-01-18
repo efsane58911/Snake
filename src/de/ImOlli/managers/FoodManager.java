@@ -91,6 +91,7 @@ public class FoodManager implements Runnable {
         while (started) {
             try {
                 Thread.sleep(delay);
+                if (!started) return;
                 spawnFood();
             } catch (InterruptedException e) {
                 e.printStackTrace();
