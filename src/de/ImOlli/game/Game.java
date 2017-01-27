@@ -7,6 +7,7 @@ import de.ImOlli.managers.FoodManager;
 import de.ImOlli.managers.KeyCheckManager;
 import de.ImOlli.objects.DebugScreen;
 import de.ImOlli.objects.EndScreen;
+import de.ImOlli.objects.ScoreScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,7 @@ public class Game extends JFrame {
     private Player player;
     private FoodManager foodManager;
     private DebugScreen debugScreen;
+    private ScoreScreen scoreScreen;
     private EndScreen endScreen;
     private ArrayList<RenderObject> removeList;
     private ArrayList<RenderObject> addList;
@@ -129,10 +131,12 @@ public class Game extends JFrame {
 
         debugScreen = new DebugScreen(this);
         endScreen = new EndScreen(this);
+        scoreScreen = new ScoreScreen(this);
 
         display.addToRenderList(player);
         display.addToRenderList(debugScreen);
         display.addToRenderList(endScreen);
+        display.addToRenderList(scoreScreen);
 
         startMainLoop();
     }

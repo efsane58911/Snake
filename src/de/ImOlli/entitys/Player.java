@@ -19,6 +19,7 @@ public class Player extends RenderObject {
     private Boolean delay = false;
     private ArrayList<Side> moveHistory;
     private Boolean death = false;
+    private Integer score;
     private final Game game;
 
     public Player(Game game, Integer x, Integer y) {
@@ -26,12 +27,13 @@ public class Player extends RenderObject {
         this.x = x;
         this.y = y;
         this.moveHistory = new ArrayList<>();
+        this.score = 0;
 
         dots = new HashMap<>();
         moveHistory.add(moveDir);
         dots.put(0, new Dot(game, x, y, 0));
-        growUp();
-        growUp();
+        growUp(false);
+        growUp(false);
     }
 
     @Override
@@ -60,7 +62,7 @@ public class Player extends RenderObject {
                 moveDir = Side.RIGHT;
             }
         } else if (KeyCheckManager.keysCheck(KeyEvent.VK_E)) {
-            growUp();
+            growUp(true);
         }
     }
 
@@ -122,7 +124,7 @@ public class Player extends RenderObject {
 
             if (game.getFoodManager().checkCollision(dots.get(0).getX(), dots.get(0).getY())) {
 
-                growUp();
+                growUp(true);
 
             }
         }
@@ -144,14 +146,17 @@ public class Player extends RenderObject {
         return null;
     }
 
-    public void growUp() {
+    public void growUp(Boolean updateScore) {
         if (dots.get(dots.size()) == null) {
 
             Dot dot = dots.get(dots.size() - 1);
-
             Side side = getLastMove(dot.getKey());
 
             dots.put(dots.size(), new Dot(game, dot.getX() - getMovementBySide(side)[0], dot.getY() - getMovementBySide(side)[1], dots.size()));
+
+            if (updateScore) {
+                this.score += 100;
+            }
         }
     }
 
@@ -194,6 +199,10 @@ public class Player extends RenderObject {
     @Override
     public Integer getHeight() {
         return null;
+    }
+
+    public Integer getScore() {
+        return this.score;
     }
 
     public HashMap<Integer, Dot> getDots() {
