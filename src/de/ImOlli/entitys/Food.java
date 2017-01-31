@@ -23,7 +23,7 @@ public class Food extends RenderObject {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.red);
-        g.fillRect(x, y, width, height);
+        g.fillRoundRect(x, y, width, height, 30, 30);
     }
 
     public void delete() {
