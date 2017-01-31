@@ -55,9 +55,9 @@ public class Game extends JFrame {
 
         JLabel l = new JLabel(title);
         JLabel l2 = new JLabel(version);
-        JButton b = new JButton("Start");
-        JButton b2 = new JButton("Options");
-        JButton b3 = new JButton("Credits");
+        JButton b = new JButton("Start Game");
+        JButton b2 = new JButton("Credits");
+        JButton b3 = new JButton("Close Game");
 
         l.setFont(f);
         l.setBounds((width / 2) - 155, 100, 400, 100);
@@ -90,6 +90,30 @@ public class Game extends JFrame {
                 remove(l);
                 remove(l2);
                 initGame();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+        });
+
+        b3.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                System.exit(0);
             }
 
             @Override
