@@ -3,14 +3,14 @@ The simple retro game Snake as java game.
 #### Homepage:
 http://ImOlli.de
 
-##ToDo
+## ToDo
 - [x] Add Food
 - [ ] Make Main Menu look more beautifully
 
 ## Credits
-####Programming:
+#### Programming:
 ImOlli
-####Design:
+#### Design:
 ImOlli
-####Sound:
+#### Sound:
 ImOlli
